@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Customer</title>
+</head>
+<body>
+<a href="/list-customers">Back List</a>
+<p th:text="${message}">
+</p>
+<form th:object="${customer}" action="/edit-customer" method="post">
+    <fieldset>
+        <legend>Update Customer</legend>
+        <table border="1">
+            <input type="hidden" th:field="*{id}">
+            <tr>
+                <th>Name</th>
+                <th><input type="text" th:field="*{name}"></th>
+                <td th:if="${#fields.hasErrors('name')}"th:errors="*{name}">Name error</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <th><input type="text" th:field="*{email}"></th>
+                <td th:if="${#fields.hasErrors('email')}"th:errors="*{email}">Email error</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <th><input type="text" th:field="*{phoneNumber}"></th>
+                <td th:if="${#fields.hasErrors('phoneNumber')}"th:errors="*{phoneNumber}">PhoneNumber error</td>
+            </tr>
+            <tr>
+                <th>Province</th>
+                <td>
+                    <select th:field="*{province}">
+                        <option th:each="p : ${province} " th:value="${p.id}" th:text="${p.name}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Update">
+                    <input type="reset" value="Cancel">
+                </td>
+
+            </tr>
+        </table>
+    </fieldset>
+</form>
+</body>
+</html>
